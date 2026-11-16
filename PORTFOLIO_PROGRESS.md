@@ -30,3 +30,13 @@
   invoked, not at config load. Descendants can survive. No deployment/purchase.
 - Normal Fork creation requested as phoenixzyy/hook-deadline after validation;
   remote publication and CI still require verification.
+
+## Publication checkpoint
+
+Normal Fork verified: https://github.com/phoenixzyy/hook-deadline, forked from
+adnanh/webhook; owner phoenixzyy ID 7067843. Eight upstream branches retained.
+Feature commit 8172d3987876257bc3f44bc68f54262c83e09bb1 has tree
+eb3dea589174254ce177656b6726b165bc527858, identical to locally verified commit
+69a206e43720ca648e71ef05e4da5d6fe7ffb90f. Parent is the pinned baseline.
+No force update. Actions enabled; this checkpoint triggers unfiltered remote CI.
+CI results must be checked separately; no remote success is claimed here.
