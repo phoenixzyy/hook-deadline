@@ -40,3 +40,19 @@ eb3dea589174254ce177656b6726b165bc527858, identical to locally verified commit
 69a206e43720ca648e71ef05e4da5d6fe7ffb90f. Parent is the pinned baseline.
 No force update. Actions enabled; this checkpoint triggers unfiltered remote CI.
 CI results must be checked separately; no remote success is claimed here.
+
+## Remote verification checkpoint
+
+- Final code commit: 80ebc23dc9044bc7c27ed3ee86f1624dc7591019. A small follow-up
+  logs invalid duration errors for asynchronous hooks; its local rejection tests passed.
+- [CI run 43923772086](https://github.com/phoenixzyy/hook-deadline/actions/runs/43923772086):
+  Ubuntu Go 1.21/1.22/1.26 and Windows Go 1.21/1.22 all succeeded. Each ran the
+  full unfiltered build/test suite. Logs confirm both socket cases passed on Linux.
+  Ubuntu Go 1.26 also passed the focused command-lifecycle race check.
+- macOS Go 1.26 is still queued awaiting a runner as of this checkpoint; no macOS
+  success is claimed. The live CI link is authoritative for later completion.
+- Public fetch verifies remote history/tree. MIT and vendor licenses are unchanged.
+- This documentation-only checkpoint uses [skip ci] to avoid repeating already
+  verified code tests. It does not cancel or bypass the pending macOS code run.
+- No deployment, service, package release, purchase, upstream contact or PR.
+  Process-tree termination, durable delivery and output-size limits remain out of scope.
