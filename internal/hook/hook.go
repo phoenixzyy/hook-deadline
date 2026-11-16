@@ -564,6 +564,7 @@ func (h *HooksFiles) Set(value string) error {
 
 // Hook type is a structure containing details for a single hook
 type Hook struct {
+	CommandTimeout                      string          `json:"command-timeout,omitempty"`
 	ID                                  string          `json:"id,omitempty"`
 	ExecuteCommand                      string          `json:"execute-command,omitempty"`
 	CommandWorkingDirectory             string          `json:"command-working-directory,omitempty"`

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"crypto/tls"
 	"encoding/json"
 	"flag"
@@ -563,6 +564,14 @@ func hookHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleHook(h *hook.Hook, r *hook.Request) (string, error) {
+	var timeout time.Duration
+	if h.CommandTimeout != "" {
+		var err error
+		timeout, err = time.ParseDuration(h.CommandTimeout)
+		if err != nil || timeout < 0 {
+			return "", fmt.Errorf("invalid command-timeout %q: expected a non-negative Go duration", h.CommandTimeout)
+		}
+	}
 	var errors []error
 
 	// check the command exists
@@ -587,6 +596,15 @@ func handleHook(h *hook.Hook, r *hook.Request) (string, error) {
 	}
 
 	cmd := exec.Command(cmdPath)
+	var commandContext context.Context
+	if timeout > 0 {
+		var cancel context.CancelFunc
+		commandContext, cancel = context.WithTimeout(context.Background(), timeout)
+		defer cancel()
+		cmd = exec.CommandContext(commandContext, cmdPath)
+		// Bound inherited output pipes after exit/cancellation; this does not kill descendants.
+		cmd.WaitDelay = time.Second
+	}
 	cmd.Dir = h.CommandWorkingDirectory
 
 	cmd.Args, errors = h.ExtractCommandArguments(r)
@@ -632,6 +650,9 @@ func handleHook(h *hook.Hook, r *hook.Request) (string, error) {
 	log.Printf("[%s] executing %s (%s) with arguments %q and environment %s using %s as cwd\n", r.ID, h.ExecuteCommand, cmd.Path, cmd.Args, envs, cmd.Dir)
 
 	out, err := cmd.CombinedOutput()
+	if err != nil && commandContext != nil && commandContext.Err() != nil {
+		err = fmt.Errorf("command exceeded timeout %s: %w", timeout, commandContext.Err())
+	}
 
 	log.Printf("[%s] command output: %s\n", r.ID, out)
 

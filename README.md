@@ -1,3 +1,17 @@
+# hook-deadline — a webhook portfolio extension
+
+Derived from [adnanh/webhook](https://github.com/adnanh/webhook), with upstream
+history and MIT notices retained. This fork adds an **opt-in command timeout**,
+subprocess regression tests and documentation. The webhook server, signature
+rules, argument extraction and command execution architecture are upstream work.
+
+See [PORTFOLIO.md](PORTFOLIO.md), [中文学习指南](LEARNING.zh-CN.md), and
+[verification progress](PORTFOLIO_PROGRESS.md). Prepared with Codex assistance;
+no independent authorship of the upstream product or personal proficiency is claimed.
+This is a command-triggering HTTP server, not a persistent delivery queue.
+
+## Upstream README
+
 # What is webhook? ![build-status][badge]
 
  <img src="https://github.com/adnanh/webhook/raw/development/docs/logo/logo-128x128.png" alt="Webhook" align="left" />

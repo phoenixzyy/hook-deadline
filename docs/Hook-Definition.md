@@ -6,6 +6,7 @@ Hooks are defined as objects in the JSON or YAML hooks configuration file. Pleas
 
  * `id` - specifies the ID of your hook. This value is used to create the HTTP endpoint (http://yourserver:port/hooks/your-hook-id)
  * `execute-command` - specifies the command that should be executed when the hook is triggered
+ * `command-timeout` - optional non-negative Go duration string (for example `"30s"` or `"500ms"`). Omitted, empty or zero preserves unlimited execution. Invalid/negative values reject execution when the hook is invoked. A positive timeout kills the directly launched process; it does not terminate its entire process tree. Output pipes may take up to one additional second to close after cancellation or process exit. See [PORTFOLIO.md](../PORTFOLIO.md) for behavior and limits.
  * `command-working-directory` - specifies the working directory that will be used for the script when it's executed
  * `response-message` - specifies the string that will be returned to the hook initiator
  * `response-headers` - specifies the list of headers in format `{"name": "X-Example-Header", "value": "it works"}` that will be returned in HTTP response for the hook
