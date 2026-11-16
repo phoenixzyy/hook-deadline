@@ -569,7 +569,9 @@ func handleHook(h *hook.Hook, r *hook.Request) (string, error) {
 		var err error
 		timeout, err = time.ParseDuration(h.CommandTimeout)
 		if err != nil || timeout < 0 {
-			return "", fmt.Errorf("invalid command-timeout %q: expected a non-negative Go duration", h.CommandTimeout)
+			err := fmt.Errorf("invalid command-timeout %q: expected a non-negative Go duration", h.CommandTimeout)
+			log.Printf("[%s] %s: %v", r.ID, h.ID, err)
+			return "", err
 		}
 	}
 	var errors []error
