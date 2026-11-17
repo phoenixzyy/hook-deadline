@@ -56,3 +56,12 @@ CI results must be checked separately; no remote success is claimed here.
   verified code tests. It does not cancel or bypass the pending macOS code run.
 - No deployment, service, package release, purchase, upstream contact or PR.
   Process-tree termination, durable delivery and output-size limits remain out of scope.
+
+## CI status correction — 2026-11-17 (UTC)
+
+- Rechecked [CI run 43923772086](https://github.com/phoenixzyy/hook-deadline/actions/runs/43923772086):
+  the macOS Go 1.26 job is completed with conclusion `cancelled`, not queued.
+  macOS remains unverified; no cancellation reason is inferred.
+- The five Ubuntu/Windows jobs remain successful. This dated correction supersedes
+  the queued/pending macOS status recorded in the earlier checkpoint above.
+- Documentation only; no code changes or new test results. [skip ci]
